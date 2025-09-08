@@ -12,7 +12,7 @@
 	<artifactId>sus-scheduler</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>sus-scheduler</name>
-	<description>Demo project for Spring Boot</description>
+	<description>MVP do Hackaton Fase 5 - Sistema de Agendamento Inteligente do SUS</description>
 	<url/>
 	<licenses>
 		<license/>
