@@ -1,4 +1,4 @@
-package br.com.fiap.sus_scheduler.adapters.persistence.entity;
+package br.com.fiap.sus_scheduler.infrastructure.persistence.entity;
 
 import br.com.fiap.sus_scheduler.domain.enums.Especialidade;
 import jakarta.persistence.*;

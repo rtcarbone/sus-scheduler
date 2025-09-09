@@ -1,4 +1,4 @@
-package br.com.fiap.sus_scheduler.adapters.web.dto;
+package br.com.fiap.sus_scheduler.infrastructure.web.dto;
 
 import br.com.fiap.sus_scheduler.domain.enums.Especialidade;
 

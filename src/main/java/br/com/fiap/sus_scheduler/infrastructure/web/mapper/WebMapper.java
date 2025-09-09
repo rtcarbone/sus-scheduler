@@ -1,8 +1,8 @@
-package br.com.fiap.sus_scheduler.adapters.web.mapper;
+package br.com.fiap.sus_scheduler.infrastructure.web.mapper;
 
-import br.com.fiap.sus_scheduler.adapters.web.dto.ConsultaResponse;
-import br.com.fiap.sus_scheduler.adapters.web.dto.MedicoRequest;
-import br.com.fiap.sus_scheduler.adapters.web.dto.PacienteRequest;
+import br.com.fiap.sus_scheduler.infrastructure.web.dto.ConsultaResponse;
+import br.com.fiap.sus_scheduler.infrastructure.web.dto.MedicoRequest;
+import br.com.fiap.sus_scheduler.infrastructure.web.dto.PacienteRequest;
 import br.com.fiap.sus_scheduler.domain.entity.Consulta;
 import br.com.fiap.sus_scheduler.domain.entity.Medico;
 import br.com.fiap.sus_scheduler.domain.entity.Paciente;

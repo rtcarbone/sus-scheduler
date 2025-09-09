@@ -1,8 +1,8 @@
-package br.com.fiap.sus_scheduler.adapters.web.controller;
+package br.com.fiap.sus_scheduler.infrastructure.web.controller;
 
-import br.com.fiap.sus_scheduler.adapters.web.dto.MedicoRequest;
-import br.com.fiap.sus_scheduler.adapters.web.dto.MedicoResponse;
-import br.com.fiap.sus_scheduler.adapters.web.mapper.WebMapper;
+import br.com.fiap.sus_scheduler.infrastructure.web.dto.MedicoRequest;
+import br.com.fiap.sus_scheduler.infrastructure.web.dto.MedicoResponse;
+import br.com.fiap.sus_scheduler.infrastructure.web.mapper.WebMapper;
 import br.com.fiap.sus_scheduler.application.usecases.CriarMedicoUseCase;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

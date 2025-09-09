@@ -1,4 +1,4 @@
-package br.com.fiap.sus_scheduler.adapters.web.dto;
+package br.com.fiap.sus_scheduler.infrastructure.web.dto;
 
 import java.time.LocalDate;
 import java.util.UUID;

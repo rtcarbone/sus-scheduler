@@ -1,8 +1,8 @@
-package br.com.fiap.sus_scheduler.adapters.persistence.repository;
+package br.com.fiap.sus_scheduler.infrastructure.persistence.repository;
 
-import br.com.fiap.sus_scheduler.adapters.persistence.entity.ConsultaJpa;
-import br.com.fiap.sus_scheduler.adapters.persistence.entity.MedicoJpa;
-import br.com.fiap.sus_scheduler.adapters.persistence.entity.PacienteJpa;
+import br.com.fiap.sus_scheduler.infrastructure.persistence.entity.ConsultaJpa;
+import br.com.fiap.sus_scheduler.infrastructure.persistence.entity.MedicoJpa;
+import br.com.fiap.sus_scheduler.infrastructure.persistence.entity.PacienteJpa;
 import br.com.fiap.sus_scheduler.domain.enums.StatusConsulta;
 import org.springframework.data.jpa.repository.JpaRepository;
 

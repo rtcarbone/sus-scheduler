@@ -1,6 +1,6 @@
-package br.com.fiap.sus_scheduler.adapters.persistence.repository;
+package br.com.fiap.sus_scheduler.infrastructure.persistence.repository;
 
-import br.com.fiap.sus_scheduler.adapters.persistence.entity.MedicoJpa;
+import br.com.fiap.sus_scheduler.infrastructure.persistence.entity.MedicoJpa;
 import br.com.fiap.sus_scheduler.domain.enums.Especialidade;
 import org.springframework.data.jpa.repository.JpaRepository;
 

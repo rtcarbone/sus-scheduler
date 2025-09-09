@@ -1,8 +1,8 @@
-package br.com.fiap.sus_scheduler.adapters.web.controller;
+package br.com.fiap.sus_scheduler.infrastructure.web.controller;
 
-import br.com.fiap.sus_scheduler.adapters.web.dto.AgendarConsultaRequest;
-import br.com.fiap.sus_scheduler.adapters.web.dto.ConsultaResponse;
-import br.com.fiap.sus_scheduler.adapters.web.mapper.WebMapper;
+import br.com.fiap.sus_scheduler.infrastructure.web.dto.AgendarConsultaRequest;
+import br.com.fiap.sus_scheduler.infrastructure.web.dto.ConsultaResponse;
+import br.com.fiap.sus_scheduler.infrastructure.web.mapper.WebMapper;
 import br.com.fiap.sus_scheduler.application.usecases.AgendarConsultaUseCase;
 import br.com.fiap.sus_scheduler.application.usecases.CancelarConsultaUseCase;
 import br.com.fiap.sus_scheduler.application.usecases.ListarConsultasPorPacienteUseCase;

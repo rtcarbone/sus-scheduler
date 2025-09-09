@@ -1,4 +1,4 @@
-package br.com.fiap.sus_scheduler.adapters.persistence.entity;
+package br.com.fiap.sus_scheduler.infrastructure.persistence.entity;
 
 import jakarta.persistence.*;
 import lombok.*;

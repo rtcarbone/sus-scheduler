@@ -1,7 +1,7 @@
-package br.com.fiap.sus_scheduler.adapters.persistence.gateway;
+package br.com.fiap.sus_scheduler.infrastructure.persistence.gateway;
 
-import br.com.fiap.sus_scheduler.adapters.persistence.mapper.PersistenceMapper;
-import br.com.fiap.sus_scheduler.adapters.persistence.repository.MedicoRepository;
+import br.com.fiap.sus_scheduler.infrastructure.persistence.mapper.PersistenceMapper;
+import br.com.fiap.sus_scheduler.infrastructure.persistence.repository.MedicoRepository;
 import br.com.fiap.sus_scheduler.application.gateways.MedicoGateway;
 import br.com.fiap.sus_scheduler.domain.entity.Medico;
 import br.com.fiap.sus_scheduler.domain.enums.Especialidade;
