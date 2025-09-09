@@ -14,7 +14,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.time.OffsetDateTime;
+import java.time.Period;
 import java.time.ZoneOffset;
 import java.util.Comparator;
 import java.util.UUID;
@@ -27,7 +29,7 @@ public class AgendarConsultaUseCaseImpl implements AgendarConsultaUseCase {
     private final PacienteGateway pacienteGateway;
     private final MedicoGateway medicoGateway;
 
-    public Consulta executar(UUID pacienteId, Especialidade esp, boolean urgencia, Integer idade) {
+    public Consulta executar(UUID pacienteId, Especialidade esp, boolean urgencia) {
         Paciente paciente = pacienteGateway.buscarPorId(pacienteId)
                 .orElseThrow(() -> new IllegalArgumentException("Paciente não encontrado"));
 
@@ -35,7 +37,7 @@ public class AgendarConsultaUseCaseImpl implements AgendarConsultaUseCase {
 
         if (medicos.isEmpty()) throw new IllegalArgumentException("Sem médicos para " + esp);
 
-        Prioridade prioridade = urgencia ? Prioridade.ALTA : (idade != null && idade >= 60 ? Prioridade.MEDIA : Prioridade.BAIXA);
+        Prioridade prioridade = calcularPrioridade(paciente, urgencia);
 
         OffsetDateTime agora = OffsetDateTime.now(ZoneOffset.UTC);
 
@@ -57,5 +59,15 @@ public class AgendarConsultaUseCaseImpl implements AgendarConsultaUseCase {
                                               .dataPrevista(dataPrevista)
                                               .criadoEm(agora)
                                               .build());
+    }
+
+    private Prioridade calcularPrioridade(Paciente paciente, boolean urgencia) {
+        if (urgencia) return Prioridade.ALTA;
+
+        int idade = Period.between(paciente.getDataNascimento(), LocalDate.now())
+                .getYears();
+        if (idade >= 60) return Prioridade.MEDIA;
+
+        return Prioridade.BAIXA;
     }
 }

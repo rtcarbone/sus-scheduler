@@ -7,6 +7,5 @@ import java.util.UUID;
 
 public record AgendarConsultaRequest(@NotNull UUID pacienteId,
                                      @NotNull Especialidade especialidade,
-                                     boolean urgencia,
-                                     Integer idade) {
+                                     boolean urgencia) {
 }
