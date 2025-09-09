@@ -1,14 +1,14 @@
 package br.com.fiap.sus_scheduler.infrastructure.persistence.gateway;
 
-import br.com.fiap.sus_scheduler.infrastructure.persistence.mapper.PersistenceMapper;
-import br.com.fiap.sus_scheduler.infrastructure.persistence.repository.ConsultaRepository;
-import br.com.fiap.sus_scheduler.infrastructure.persistence.repository.MedicoRepository;
-import br.com.fiap.sus_scheduler.infrastructure.persistence.repository.PacienteRepository;
 import br.com.fiap.sus_scheduler.application.gateway.ConsultaGateway;
 import br.com.fiap.sus_scheduler.domain.entity.Consulta;
 import br.com.fiap.sus_scheduler.domain.entity.Medico;
 import br.com.fiap.sus_scheduler.domain.entity.Paciente;
 import br.com.fiap.sus_scheduler.domain.enums.StatusConsulta;
+import br.com.fiap.sus_scheduler.infrastructure.persistence.mapper.PersistenceMapper;
+import br.com.fiap.sus_scheduler.infrastructure.persistence.repository.ConsultaRepository;
+import br.com.fiap.sus_scheduler.infrastructure.persistence.repository.MedicoRepository;
+import br.com.fiap.sus_scheduler.infrastructure.persistence.repository.PacienteRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

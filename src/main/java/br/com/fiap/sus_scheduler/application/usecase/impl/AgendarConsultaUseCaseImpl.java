@@ -30,15 +30,23 @@ public class AgendarConsultaUseCaseImpl implements AgendarConsultaUseCase {
     public Consulta executar(UUID pacienteId, Especialidade esp, boolean urgencia, Integer idade) {
         Paciente paciente = pacienteGateway.buscarPorId(pacienteId)
                 .orElseThrow(() -> new IllegalArgumentException("Paciente não encontrado"));
+
         var medicos = medicoGateway.listarPorEspecialidade(esp);
+
         if (medicos.isEmpty()) throw new IllegalArgumentException("Sem médicos para " + esp);
+
         Prioridade prioridade = urgencia ? Prioridade.ALTA : (idade != null && idade >= 60 ? Prioridade.MEDIA : Prioridade.BAIXA);
+
         OffsetDateTime agora = OffsetDateTime.now(ZoneOffset.UTC);
+
         Medico escolhido = medicos.stream()
                 .min(Comparator.comparingLong(m -> consultaGateway.contarPorMedicoStatusAposData(m, StatusConsulta.AGENDADA, agora)))
                 .orElseThrow();
+
         long fila = consultaGateway.contarPorMedicoStatusAposData(escolhido, StatusConsulta.AGENDADA, agora);
+
         OffsetDateTime dataPrevista = agora.plusDays(Math.max(1, fila + (prioridade == Prioridade.ALTA ? 0 : 1)));
+
         return consultaGateway.salvar(Consulta.builder()
                                               .id(java.util.UUID.randomUUID())
                                               .paciente(paciente)
