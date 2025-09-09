@@ -43,9 +43,9 @@ public class ConsultaGatewayJpa implements ConsultaGateway {
                 .toList();
     }
 
-    public long contarPorMedicoStatusAposData(Medico m, StatusConsulta s, OffsetDateTime after) {
+    public long contarPorMedicoStatusAposData(Medico m, StatusConsulta s, OffsetDateTime data) {
         var mj = medicoRepo.findById(m.getId())
                 .orElseThrow();
-        return repo.countByMedicoAndStatusAndDataPrevistaAfter(mj, s, after);
+        return repo.countByMedicoAndStatusAndDataPrevistaAfter(mj, s, data);
     }
 }

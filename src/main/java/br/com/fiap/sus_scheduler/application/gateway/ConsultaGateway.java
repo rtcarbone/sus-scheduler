@@ -8,13 +8,14 @@ import br.com.fiap.sus_scheduler.domain.enums.StatusConsulta;
 import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 public interface ConsultaGateway {
     Consulta salvar(Consulta c);
 
-    Optional<Consulta> buscarPorId(java.util.UUID id);
+    Optional<Consulta> buscarPorId(UUID id);
 
     List<Consulta> listarPorPaciente(Paciente p);
 
-    long contarPorMedicoStatusAposData(Medico m, StatusConsulta s, OffsetDateTime after);
+    long contarPorMedicoStatusAposData(Medico m, StatusConsulta s, OffsetDateTime data);
 }
