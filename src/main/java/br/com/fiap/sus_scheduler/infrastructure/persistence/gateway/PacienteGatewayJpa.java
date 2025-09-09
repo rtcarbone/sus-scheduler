@@ -2,7 +2,7 @@ package br.com.fiap.sus_scheduler.infrastructure.persistence.gateway;
 
 import br.com.fiap.sus_scheduler.infrastructure.persistence.mapper.PersistenceMapper;
 import br.com.fiap.sus_scheduler.infrastructure.persistence.repository.PacienteRepository;
-import br.com.fiap.sus_scheduler.application.gateways.PacienteGateway;
+import br.com.fiap.sus_scheduler.application.gateway.PacienteGateway;
 import br.com.fiap.sus_scheduler.domain.entity.Paciente;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

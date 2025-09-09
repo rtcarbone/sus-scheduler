@@ -1,7 +1,7 @@
-package br.com.fiap.sus_scheduler.application.usecases.impl;
+package br.com.fiap.sus_scheduler.application.usecase.impl;
 
-import br.com.fiap.sus_scheduler.application.gateways.PacienteGateway;
-import br.com.fiap.sus_scheduler.application.usecases.CriarPacienteUseCase;
+import br.com.fiap.sus_scheduler.application.gateway.PacienteGateway;
+import br.com.fiap.sus_scheduler.application.usecase.CriarPacienteUseCase;
 import br.com.fiap.sus_scheduler.domain.entity.Paciente;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

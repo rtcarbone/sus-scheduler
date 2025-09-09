@@ -1,8 +1,8 @@
-package br.com.fiap.sus_scheduler.application.usecases.impl;
+package br.com.fiap.sus_scheduler.application.usecase.impl;
 
-import br.com.fiap.sus_scheduler.application.gateways.ConsultaGateway;
-import br.com.fiap.sus_scheduler.application.gateways.PacienteGateway;
-import br.com.fiap.sus_scheduler.application.usecases.ListarConsultasPorPacienteUseCase;
+import br.com.fiap.sus_scheduler.application.gateway.ConsultaGateway;
+import br.com.fiap.sus_scheduler.application.gateway.PacienteGateway;
+import br.com.fiap.sus_scheduler.application.usecase.ListarConsultasPorPacienteUseCase;
 import br.com.fiap.sus_scheduler.domain.entity.Consulta;
 import br.com.fiap.sus_scheduler.domain.entity.Paciente;
 import lombok.RequiredArgsConstructor;

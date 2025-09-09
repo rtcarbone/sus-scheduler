@@ -3,7 +3,7 @@ package br.com.fiap.sus_scheduler.infrastructure.web.controller;
 import br.com.fiap.sus_scheduler.infrastructure.web.dto.PacienteRequest;
 import br.com.fiap.sus_scheduler.infrastructure.web.dto.PacienteResponse;
 import br.com.fiap.sus_scheduler.infrastructure.web.mapper.WebMapper;
-import br.com.fiap.sus_scheduler.application.usecases.CriarPacienteUseCase;
+import br.com.fiap.sus_scheduler.application.usecase.CriarPacienteUseCase;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

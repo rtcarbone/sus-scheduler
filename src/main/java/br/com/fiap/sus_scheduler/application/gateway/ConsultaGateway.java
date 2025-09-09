@@ -1,4 +1,4 @@
-package br.com.fiap.sus_scheduler.application.gateways;
+package br.com.fiap.sus_scheduler.application.gateway;
 
 import br.com.fiap.sus_scheduler.domain.entity.Consulta;
 import br.com.fiap.sus_scheduler.domain.entity.Medico;
