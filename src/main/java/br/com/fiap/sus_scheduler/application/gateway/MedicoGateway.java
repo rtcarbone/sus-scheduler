@@ -5,11 +5,16 @@ import br.com.fiap.sus_scheduler.domain.enums.Especialidade;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 public interface MedicoGateway {
     Medico salvar(Medico m);
 
-    Optional<Medico> buscarPorId(java.util.UUID id);
+    Optional<Medico> buscarPorId(UUID id);
+
+    List<Medico> listarTodos();
 
     List<Medico> listarPorEspecialidade(Especialidade esp);
+
+    void deletarPorId(UUID id);
 }

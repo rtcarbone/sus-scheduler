@@ -1,10 +1,10 @@
 package br.com.fiap.sus_scheduler.infrastructure.persistence.gateway;
 
-import br.com.fiap.sus_scheduler.infrastructure.persistence.mapper.PersistenceMapper;
-import br.com.fiap.sus_scheduler.infrastructure.persistence.repository.MedicoRepository;
 import br.com.fiap.sus_scheduler.application.gateway.MedicoGateway;
 import br.com.fiap.sus_scheduler.domain.entity.Medico;
 import br.com.fiap.sus_scheduler.domain.enums.Especialidade;
+import br.com.fiap.sus_scheduler.infrastructure.persistence.mapper.PersistenceMapper;
+import br.com.fiap.sus_scheduler.infrastructure.persistence.repository.MedicoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -27,10 +27,21 @@ public class MedicoGatewayJpa implements MedicoGateway {
                 .map(mapper::toDomain);
     }
 
+    public List<Medico> listarTodos() {
+        return repo.findAll()
+                .stream()
+                .map(mapper::toDomain)
+                .toList();
+    }
+
     public List<Medico> listarPorEspecialidade(Especialidade esp) {
         return repo.findByEspecialidade(esp)
                 .stream()
                 .map(mapper::toDomain)
                 .toList();
+    }
+
+    public void deletarPorId(UUID id) {
+        repo.deleteById(id);
     }
 }
