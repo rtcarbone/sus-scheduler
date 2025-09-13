@@ -2,6 +2,7 @@ package br.com.fiap.sus_scheduler.application.gateway;
 
 import br.com.fiap.sus_scheduler.domain.entity.Paciente;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -11,4 +12,8 @@ public interface PacienteGateway {
     Optional<Paciente> buscarPorId(UUID id);
 
     Optional<Paciente> buscarPorCpf(String cpf);
+
+    List<Paciente> listarTodos();
+
+    void deletarPorId(UUID id);
 }

@@ -1,12 +1,13 @@
 package br.com.fiap.sus_scheduler.infrastructure.persistence.gateway;
 
-import br.com.fiap.sus_scheduler.infrastructure.persistence.mapper.PersistenceMapper;
-import br.com.fiap.sus_scheduler.infrastructure.persistence.repository.PacienteRepository;
 import br.com.fiap.sus_scheduler.application.gateway.PacienteGateway;
 import br.com.fiap.sus_scheduler.domain.entity.Paciente;
+import br.com.fiap.sus_scheduler.infrastructure.persistence.mapper.PersistenceMapper;
+import br.com.fiap.sus_scheduler.infrastructure.persistence.repository.PacienteRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -29,4 +30,18 @@ public class PacienteGatewayJpa implements PacienteGateway {
         return repo.findByCpf(cpf)
                 .map(mapper::toDomain);
     }
+
+    @Override
+    public List<Paciente> listarTodos() {
+        return repo.findAll()
+                .stream()
+                .map(mapper::toDomain)
+                .toList();
+    }
+
+    @Override
+    public void deletarPorId(UUID id) {
+        repo.deleteById(id);
+    }
+
 }
