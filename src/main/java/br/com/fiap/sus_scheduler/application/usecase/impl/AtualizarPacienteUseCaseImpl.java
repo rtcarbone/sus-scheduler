@@ -16,15 +16,15 @@ import java.util.UUID;
 @RequiredArgsConstructor
 @Transactional
 public class AtualizarPacienteUseCaseImpl implements AtualizarPacienteUseCase {
-    private final PacienteGateway gateway;
+    private final PacienteGateway pacienteGateway;
 
     @Override
     public Paciente executar(UUID id, String nome, String cpf, LocalDate dataNascimento) {
-        var atual = gateway.buscarPorId(id)
+        var atual = pacienteGateway.buscarPorId(id)
                 .orElseThrow(() -> new PacienteNotFoundException(id));
 
         if (cpf != null && !cpf.equals(atual.getCpf())) {
-            var existente = gateway.buscarPorCpf(cpf);
+            var existente = pacienteGateway.buscarPorCpf(cpf);
             if (existente.isPresent() && !existente.get()
                     .getId()
                     .equals(id)) {
@@ -39,6 +39,6 @@ public class AtualizarPacienteUseCaseImpl implements AtualizarPacienteUseCase {
                 .dataNascimento(dataNascimento != null ? dataNascimento : atual.getDataNascimento())
                 .build();
 
-        return gateway.salvar(atualizado);
+        return pacienteGateway.salvar(atualizado);
     }
 }
