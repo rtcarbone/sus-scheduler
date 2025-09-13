@@ -34,26 +34,26 @@ public class MedicoController {
 
     @GetMapping("/{id}")
     public ResponseEntity<MedicoResponse> buscar(@PathVariable UUID id) {
-        Medico m = buscarPorId.executar(id);
-        return ResponseEntity.ok(mapper.toResponse(m));
+        Medico medico = buscarPorId.executar(id);
+        return ResponseEntity.ok(mapper.toResponse(medico));
     }
 
     @GetMapping
     public ResponseEntity<List<MedicoResponse>> listar(
             @RequestParam(required = false) Especialidade especialidade
     ) {
-        var out = listar.executar(especialidade)
+        var lista = listar.executar(especialidade)
                 .stream()
                 .map(mapper::toResponse)
                 .toList();
-        return ResponseEntity.ok(out);
+        return ResponseEntity.ok(lista);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<MedicoResponse> atualizar(@PathVariable UUID id,
                                                     @RequestBody @Valid MedicoUpdateRequest req) {
-        Medico m = atualizar.executar(id, req.nome(), req.especialidade(), req.unidade());
-        return ResponseEntity.ok(mapper.toResponse(m));
+        Medico medico = atualizar.executar(id, req.nome(), req.especialidade(), req.unidade());
+        return ResponseEntity.ok(mapper.toResponse(medico));
     }
 
     @DeleteMapping("/{id}")
