@@ -16,11 +16,11 @@ public class OpenApiConfig {
         return new OpenAPI()
                 .info(new Info()
                               .title("SUS Scheduler API")
-                              .description("API de agendamento de consultas (Hackaton) — Clean Architecture")
+                              .description("API de agendamento de consultas — Clean Architecture")
                               .version("v1.0.0"))
                 .servers(List.of(
                         new Server().url("http://localhost:8080")
-                                .description("Localhost")
+                                .description("Ambiente Local")
                 ));
     }
 }
