@@ -10,6 +10,8 @@ import br.com.fiap.sus_scheduler.domain.entity.Paciente;
 import br.com.fiap.sus_scheduler.domain.enums.Especialidade;
 import br.com.fiap.sus_scheduler.domain.enums.Prioridade;
 import br.com.fiap.sus_scheduler.domain.enums.StatusConsulta;
+import br.com.fiap.sus_scheduler.domain.exception.MedicoNaoDisponivelException;
+import br.com.fiap.sus_scheduler.domain.exception.PacienteNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,11 +33,11 @@ public class AgendarConsultaUseCaseImpl implements AgendarConsultaUseCase {
 
     public Consulta executar(UUID pacienteId, Especialidade esp, boolean urgencia) {
         Paciente paciente = pacienteGateway.buscarPorId(pacienteId)
-                .orElseThrow(() -> new IllegalArgumentException("Paciente não encontrado"));
+                .orElseThrow(() -> new PacienteNotFoundException(pacienteId));
 
         var medicos = medicoGateway.listarPorEspecialidade(esp);
 
-        if (medicos.isEmpty()) throw new IllegalArgumentException("Sem médicos para " + esp);
+        if (medicos.isEmpty()) throw new MedicoNaoDisponivelException(esp);
 
         Prioridade prioridade = calcularPrioridade(paciente, urgencia);
 
@@ -43,7 +45,7 @@ public class AgendarConsultaUseCaseImpl implements AgendarConsultaUseCase {
 
         Medico escolhido = medicos.stream()
                 .min(Comparator.comparingLong(m -> consultaGateway.contarPorMedicoStatusAposData(m, StatusConsulta.AGENDADA, agora)))
-                .orElseThrow(() -> new IllegalArgumentException("Nenhum médico disponível para a especialidade " + esp));
+                .orElseThrow(() -> new MedicoNaoDisponivelException(esp));
 
         long fila = consultaGateway.contarPorMedicoStatusAposData(escolhido, StatusConsulta.AGENDADA, agora);
 

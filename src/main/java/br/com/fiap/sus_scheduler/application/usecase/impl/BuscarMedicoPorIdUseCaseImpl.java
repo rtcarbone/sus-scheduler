@@ -3,6 +3,7 @@ package br.com.fiap.sus_scheduler.application.usecase.impl;
 import br.com.fiap.sus_scheduler.application.gateway.MedicoGateway;
 import br.com.fiap.sus_scheduler.application.usecase.BuscarMedicoPorIdUseCase;
 import br.com.fiap.sus_scheduler.domain.entity.Medico;
+import br.com.fiap.sus_scheduler.domain.exception.MedicoNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,6 +18,6 @@ public class BuscarMedicoPorIdUseCaseImpl implements BuscarMedicoPorIdUseCase {
 
     public Medico executar(UUID id) {
         return gateway.buscarPorId(id)
-                .orElseThrow(() -> new IllegalArgumentException("Médico não encontrado"));
+                .orElseThrow(() -> new MedicoNotFoundException(id));
     }
 }

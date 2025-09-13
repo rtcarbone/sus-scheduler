@@ -3,6 +3,8 @@ package br.com.fiap.sus_scheduler.application.usecase.impl;
 import br.com.fiap.sus_scheduler.application.gateway.PacienteGateway;
 import br.com.fiap.sus_scheduler.application.usecase.AtualizarPacienteUseCase;
 import br.com.fiap.sus_scheduler.domain.entity.Paciente;
+import br.com.fiap.sus_scheduler.domain.exception.CpfDuplicadoException;
+import br.com.fiap.sus_scheduler.domain.exception.PacienteNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,14 +21,14 @@ public class AtualizarPacienteUseCaseImpl implements AtualizarPacienteUseCase {
     @Override
     public Paciente executar(UUID id, String nome, String cpf, LocalDate dataNascimento) {
         var atual = gateway.buscarPorId(id)
-                .orElseThrow(() -> new IllegalArgumentException("Paciente não encontrado"));
+                .orElseThrow(() -> new PacienteNotFoundException(id));
 
         if (cpf != null && !cpf.equals(atual.getCpf())) {
             var existente = gateway.buscarPorCpf(cpf);
             if (existente.isPresent() && !existente.get()
                     .getId()
                     .equals(id)) {
-                throw new IllegalArgumentException("Já existe outro paciente com o CPF informado");
+                throw new CpfDuplicadoException(cpf);
             }
         }
 

@@ -3,6 +3,7 @@ package br.com.fiap.sus_scheduler.application.usecase.impl;
 import br.com.fiap.sus_scheduler.application.gateway.ConsultaGateway;
 import br.com.fiap.sus_scheduler.application.usecase.CancelarConsultaUseCase;
 import br.com.fiap.sus_scheduler.domain.entity.Consulta;
+import br.com.fiap.sus_scheduler.domain.exception.ConsultaNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,7 +18,7 @@ public class CancelarConsultaUseCaseImpl implements CancelarConsultaUseCase {
 
     public Consulta executar(UUID consultaId) {
         Consulta atual = consultaGateway.buscarPorId(consultaId)
-                .orElseThrow(() -> new IllegalArgumentException("Consulta não encontrada"));
+                .orElseThrow(() -> new ConsultaNotFoundException(consultaId));
         return consultaGateway.salvar(atual.cancelar());
     }
 }
