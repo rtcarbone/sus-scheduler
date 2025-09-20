@@ -1,5 +1,3 @@
-version: "3.9"
-
 services:
   db:
     image: postgres:16
@@ -24,7 +22,7 @@ services:
     depends_on:
       - db
     environment:
-      PGADMIN_DEFAULT_EMAIL: admin@local.test
+      PGADMIN_DEFAULT_EMAIL: admin@fiap.com.br
       PGADMIN_DEFAULT_PASSWORD: admin
     ports:
       - "5050:80"
