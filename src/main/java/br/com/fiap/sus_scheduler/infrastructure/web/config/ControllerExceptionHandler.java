@@ -4,12 +4,12 @@ import br.com.fiap.sus_scheduler.domain.exception.*;
 import br.com.fiap.sus_scheduler.infrastructure.web.dto.ErrorResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.time.OffsetDateTime;
 
-@RestControllerAdvice
+@ControllerAdvice
 public class ControllerExceptionHandler {
 
     private ErrorResponse buildError(HttpStatus status, String message) {
