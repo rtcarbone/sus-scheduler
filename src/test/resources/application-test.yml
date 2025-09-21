@@ -1,0 +1,18 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        format_sql: true
+  flyway:
+    enabled: false
+    locations: classpath:db/migration
+  datasource:
+    url: jdbc:postgresql://localhost:5432/ignoredByTestcontainers
+    username: postgres
+    password: postgres
+
+logging:
+  level:
+    org.hibernate.SQL: warn

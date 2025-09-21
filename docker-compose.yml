@@ -15,12 +15,14 @@ services:
       interval: 5s
       timeout: 5s
       retries: 10
+    networks: [ sus_net ]
 
   pgadmin:
     image: dpage/pgadmin4:8
     container_name: sus-pgadmin
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     environment:
       PGADMIN_DEFAULT_EMAIL: admin@fiap.com.br
       PGADMIN_DEFAULT_PASSWORD: admin
@@ -28,11 +30,17 @@ services:
       - "5050:80"
     volumes:
       - pgadmin:/var/lib/pgadmin
+    networks: [ sus_net ]
 
   app:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: production
     container_name: sus-scheduler
     depends_on:
+      run-tests:
+        condition: service_completed_successfully
       db:
         condition: service_healthy
     environment:
@@ -44,7 +52,30 @@ services:
     ports:
       - "8080:8080"
     restart: unless-stopped
+    networks: [ sus_net ]
+
+  # Serviço dedicado para TESTES com Testcontainers
+  run-tests:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: test-runner
+    container_name: sus-tests
+    environment:
+      SPRING_PROFILES_ACTIVE: test
+      MAVEN_OPTS: -Xmx1g
+      TESTCONTAINERS_HOST_OVERRIDE: host.docker.internal
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - maven-cache:/root/.m2
+    entrypoint: [ "sh","-c","mvn -B clean verify" ]
+    restart: "no"
+    networks: [ sus_net ]
 
 volumes:
   pgdata:
   pgadmin:
+  maven-cache:
+
+networks:
+  sus_net:
