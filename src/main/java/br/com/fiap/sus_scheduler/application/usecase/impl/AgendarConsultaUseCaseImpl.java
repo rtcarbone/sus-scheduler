@@ -33,7 +33,6 @@ public class AgendarConsultaUseCaseImpl implements AgendarConsultaUseCase {
     private final PacienteGateway pacienteGateway;
     private final MedicoGateway medicoGateway;
 
-    // --- utilitários de calendário/expediente (inalterados) ---
     private static boolean ehDiaUtil(LocalDate d) {
         DayOfWeek w = d.getDayOfWeek();
         return w != DayOfWeek.SATURDAY && w != DayOfWeek.SUNDAY;
@@ -123,7 +122,6 @@ public class AgendarConsultaUseCaseImpl implements AgendarConsultaUseCase {
     }
 
     /**
-     * Política nova:
      * - Se houver conflito e TODAS as consultas conflitantes tiverem prioridade MENOR que a nova:
      * -> cancela todas e usa o slot.
      * - Se houver pelo menos uma de prioridade IGUAL ou MAIOR:
