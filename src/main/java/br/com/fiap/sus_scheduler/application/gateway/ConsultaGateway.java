@@ -11,11 +11,20 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface ConsultaGateway {
-    Consulta salvar(Consulta c);
+    long contarPorMedicoStatusAposData(Medico medico, StatusConsulta status, OffsetDateTime data);
+
+    Optional<Consulta> buscarAgendadaNoHorario(Medico medico, OffsetDateTime inicio, OffsetDateTime fim);
+
+    Consulta salvar(Consulta consulta);
+
+    Consulta atualizar(Consulta consulta);
 
     Optional<Consulta> buscarPorId(UUID id);
 
     List<Consulta> listarPorPaciente(Paciente p);
 
-    long contarPorMedicoStatusAposData(Medico m, StatusConsulta s, OffsetDateTime data);
+    Optional<Consulta> buscarDoPacienteNoIntervalo(Paciente paciente,
+                                                   OffsetDateTime inicio,
+                                                   OffsetDateTime fimExclusivo,
+                                                   StatusConsulta status);
 }

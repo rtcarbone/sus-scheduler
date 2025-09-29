@@ -20,20 +20,31 @@ import java.util.UUID;
 @Component
 @RequiredArgsConstructor
 public class ConsultaGatewayJpa implements ConsultaGateway {
+
+    private static final StatusConsulta PADRAO_STATUS = StatusConsulta.AGENDADA;
+
     private final ConsultaRepository repo;
     private final PacienteRepository pacienteRepo;
-    private final MedicoRepository medicoRepo;
+    private final MedicoRepository medicoRepo; // ainda usado no listarPorPaciente; dá pra remover se trocar o finder por pacienteId
     private final PersistenceMapper mapper;
 
+    @Override
     public Consulta salvar(Consulta c) {
         return mapper.toDomain(repo.save(mapper.toJpa(c)));
     }
 
+    @Override
+    public Consulta atualizar(Consulta c) {
+        return mapper.toDomain(repo.save(mapper.toJpa(c)));
+    }
+
+    @Override
     public Optional<Consulta> buscarPorId(UUID id) {
         return repo.findById(id)
                 .map(mapper::toDomain);
     }
 
+    @Override
     public List<Consulta> listarPorPaciente(Paciente p) {
         var pj = pacienteRepo.findById(p.getId())
                 .orElseThrow();
@@ -43,9 +54,29 @@ public class ConsultaGatewayJpa implements ConsultaGateway {
                 .toList();
     }
 
+    @Override
     public long contarPorMedicoStatusAposData(Medico m, StatusConsulta s, OffsetDateTime data) {
-        var mj = medicoRepo.findById(m.getId())
-                .orElseThrow();
-        return repo.countByMedicoAndStatusAndDataPrevistaAfter(mj, s, data);
+        return repo.countByMedicoIdAndStatusAndDataPrevistaAfter(m.getId(), s, data);
+    }
+
+    @Override
+    public Optional<Consulta> buscarAgendadaNoHorario(Medico medico,
+                                                      OffsetDateTime inicio,
+                                                      OffsetDateTime fimExclusivo) {
+        return repo.findByMedicoIdAndStatusAndDataPrevistaGreaterThanEqualAndDataPrevistaLessThan(
+                        medico.getId(), PADRAO_STATUS, inicio, fimExclusivo
+                )
+                .map(mapper::toDomain);
+    }
+
+    @Override
+    public Optional<Consulta> buscarDoPacienteNoIntervalo(Paciente paciente,
+                                                          OffsetDateTime inicio,
+                                                          OffsetDateTime fimExclusivo,
+                                                          StatusConsulta status) {
+        return repo
+                .findFirstByPacienteIdAndStatusAndDataPrevistaGreaterThanEqualAndDataPrevistaLessThanOrderByDataPrevistaAsc(
+                        paciente.getId(), status, inicio, fimExclusivo)
+                .map(mapper::toDomain);
     }
 }

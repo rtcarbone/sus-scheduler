@@ -23,6 +23,19 @@ public class Consulta {
     private final OffsetDateTime dataPrevista;
     private final OffsetDateTime criadoEm;
 
+    public Consulta reagendar(OffsetDateTime novaData) {
+        return Consulta.builder()
+                .id(this.id)
+                .paciente(this.paciente)
+                .medico(this.medico)
+                .especialidade(this.especialidade)
+                .prioridade(this.prioridade)
+                .status(this.status)
+                .criadoEm(this.criadoEm)
+                .dataPrevista(novaData)
+                .build();
+    }
+
     public Consulta cancelar() {
         return Consulta.builder()
                 .id(id)
